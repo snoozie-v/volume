@@ -5,7 +5,8 @@ import fetchPrice from './pages/fetchPrice';
 import { ABIVeSeaGetProfile, ABIWoVGetAccountProperties } from './pages/ABI';
 import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
-
+import getImageForCollection from './pages/getImageForCollection';
+import contractToAccount from './pages/contractToAccount';
 
 const connex = new Connex({
     node: 'https://mainnet.veblocks.net/', 
@@ -298,13 +299,15 @@ export default function App() {
             
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
+            
             const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase()) 
-            decodedLog.nftAddress = collectionName ? collectionName.title : nftAddress
+            decodedLog.collection = collectionName ? collectionName.title : nftAddress
+            decodedLog.nftAddress = nftAddress
             decodedLog.price = price;
             decodedLog.tokenId = tokenId;
             decodedLog.number = index + 1;
-            console.log(decodedLog)
-            // const account = getAccountForContract(nftAddress);
+            const account = contractToAccount(nftAddress);
+            decodedLog.account = account
             // decodedLog.image = await getImageForCollection(account, tokenId);
             return decodedLog;
           })
@@ -320,7 +323,7 @@ export default function App() {
         let vetCount = 0;
 
         for (const transfer of formattedTransfers) {
-          const collectionName = transfer.nftAddress;
+          const collectionName = transfer.collection;
 
           if (collectionAmounts[collectionName]) {
             collectionAmounts[collectionName] += parseFloat(transfer.price);
@@ -333,8 +336,8 @@ export default function App() {
         const collectionAmountsArray = Object.entries(collectionAmounts);
         collectionAmountsArray.sort((a, b) => b[1] - a[1]);
 
-        const topCollections = collectionAmountsArray.slice(0, 3);
-        console.log(topCollections)
+        const topCollections = collectionAmountsArray.slice(0, 5);
+
 
         for (const transfer of formattedTransfers) {
           const wallet = transfer.buyer;
@@ -380,7 +383,7 @@ export default function App() {
     <>
       <h1>vechain nft volume app</h1>
       <p>Between {startDateTimeString} and {endDateTimeString} There were {totalCount} nft purchases for a total of {vetCount} vet</p>
-      <h2>Top 3 Collections by $VET</h2>
+      <h2>Top 5 Collections by $VET</h2>
       <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count]) => (
                 <li key={collection}>
@@ -402,8 +405,13 @@ export default function App() {
           <p>type: {transfer.type}</p>
           <p>buyer: {transfer.buyer}</p>
           <p>price: {transfer.price}</p>
-          <p>collection: {transfer.nftAddress}</p>
+          <p>collection: {transfer.collection}</p>
+          <p>nftAddress: {transfer.nftAddress}</p>
           <p>tokenID: {transfer.tokenId}</p>
+          <p>
+                    Time:{" "}
+                    {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
+                  </p>
         </li>
       )}
       </ul>
