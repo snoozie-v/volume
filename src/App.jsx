@@ -15,16 +15,16 @@ const connex = new Connex({
 
 
 
-const startDateTimeString = "10/2/23 9:30 PM UTC";
+const startDateTimeString = "10/4/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
 
-const endDateTimeString = "10/4/23 9:30 PM UTC";
+const endDateTimeString = "10/4/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 export default function App() {
   const [transfers, setTransfers] = useState([]);
-  const [walletCounts, setWalletAmounts] = useState({});
+  const [walletAmounts, setWalletAmounts] = useState({});
   const [totalCount, setTotalCount] = useState(0);
   const [vetCount, setVetCount] = useState(0);
   const [collectionAmt, setCollectionAmt] = useState({})
@@ -365,7 +365,9 @@ export default function App() {
 
         const amountsArray = Object.entries(amounts);
         amountsArray.sort((a, b) => b[1] - a[1]);
-        const sortedAmounts = Object.fromEntries(amountsArray);
+        const top5Collector = amountsArray.slice(0, 5)
+        const sortedAmounts = Object.fromEntries(top5Collector);
+
 
         setWalletAmounts(sortedAmounts);
         setTotalCount(totalCount);
@@ -381,10 +383,30 @@ export default function App() {
 
   return (
     <>
-      <h1>vechain nft volume app</h1>
-      <p>Between {startDateTimeString} and {endDateTimeString} There were {totalCount} nft purchases for a total of {vetCount} vet</p>
-      <h2>Top 5 Collections by $VET</h2>
-      <ul style={{listStyleType:"none"}}>
+    
+      <div className='hero'>
+      <h1>vechain nft volume</h1>
+        <div className='times'>
+          <p>Start: {startDateTimeString}</p> 
+          <p>End: {endDateTimeString}</p> 
+          <p>Count: {totalCount}</p> 
+          <p>Total: {vetCount} vet</p>
+        </div>
+        <div className='collectors'>
+          <h2>Top 5 Collectors by $VET</h2>
+          <ul style={{listStyleType:"none"}}>
+              {Object.entries(walletAmounts).map(([wallet, count]) =>(
+                <li key={wallet}>
+                  <p>
+                  {wallet} with {count} 
+                  </p>
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className='collections'>
+          <h2>Top 5 Collections by $VET</h2>
+          <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count]) => (
                 <li key={collection}>
                   <p>
@@ -392,7 +414,11 @@ export default function App() {
                   </p>
                 </li>
               ))}
-            </ul>
+          </ul>
+        </div>
+        
+      </div>
+
 
       <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr', gap: "10px"}}>
       {transfers.map((transfer, index) => 
