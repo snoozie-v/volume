@@ -26,7 +26,7 @@ export default function App() {
   const [walletCounts, setWalletAmounts] = useState({});
   const [totalCount, setTotalCount] = useState(0);
   const [vetCount, setVetCount] = useState(0);
-  
+  const [collectionAmt, setCollectionAmt] = useState({})
 
   useEffect(() => {
     async function getHistoryFor() {
@@ -314,9 +314,27 @@ export default function App() {
 
         const amounts = {};
         const quantities = {};
+        const collectionAmounts = {};
 
         let totalCount = 0;
         let vetCount = 0;
+
+        for (const transfer of formattedTransfers) {
+          const collectionName = transfer.nftAddress;
+
+          if (collectionAmounts[collectionName]) {
+            collectionAmounts[collectionName] += parseFloat(transfer.price);
+          } else {
+            collectionAmounts[collectionName] = parseFloat(transfer.price);
+          }
+        }
+
+
+        const collectionAmountsArray = Object.entries(collectionAmounts);
+        collectionAmountsArray.sort((a, b) => b[1] - a[1]);
+
+        const topCollections = collectionAmountsArray.slice(0, 3);
+        console.log(topCollections)
 
         for (const transfer of formattedTransfers) {
           const wallet = transfer.buyer;
@@ -349,6 +367,7 @@ export default function App() {
         setWalletAmounts(sortedAmounts);
         setTotalCount(totalCount);
         setVetCount(vetCount);
+        setCollectionAmt(topCollections)
         
       } catch (err) {
         console.error(err);
@@ -360,19 +379,17 @@ export default function App() {
   return (
     <>
       <h1>vechain nft volume app</h1>
-      <p>total purchases: {totalCount}</p>
-      <p>for a total of {vetCount} vet</p>
-      <h2>Transfers</h2>
-      {/* <ul>
-              {Object.entries(walletCounts).map(([wallet, count]) => (
-                <li key={wallet}>
+      <p>Between {startDateTimeString} and {endDateTimeString} There were {totalCount} nft purchases for a total of {vetCount} vet</p>
+      <h2>Top 3 Collections by $VET</h2>
+      <ul style={{listStyleType:"none"}}>
+              {Object.entries(collectionAmt).map(([collection, count]) => (
+                <li key={collection}>
                   <p>
-                    {wallet} <br/>with {count}
-                  
+                    {count[0]} with a total of {count[1]} vet
                   </p>
                 </li>
               ))}
-            </ul> */}
+            </ul>
 
       <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr', gap: "10px"}}>
       {transfers.map((transfer, index) => 
