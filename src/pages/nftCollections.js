@@ -117,6 +117,7 @@ const nftCollections = [
     {"id":121,"name":"Mino Mob Mutants", "title":"Mino Mob Mutants", "banner": "", "nftAddress":"0x523bef286ac6b08eb1a9db765970852b086903fa"},
     {"id":122,"name":"OG Wizard Punks", "title":"OG Wizard Punks", "banner":"", "nftAddress": "0xb6ad388aee8d88185c52d1a18bb81c28c567a394"},
     {"id":123,"name":"METALANDS", "title":"METALANDS", "banner":"", "nftAddress":"0x84677a2fdc77d0fba658c75a41ef62dac67bfcf4"},
+    {"id":124,"name":"Mad V-Apes Elite", "title":"Mad V-Apes Elite", "banner":"", "nftAddress":"0x67799b0ca136b6ed2ab9b8aad6a4a1beb1f507da"},
   ]
 
   export default nftCollections;

@@ -10,5 +10,7 @@
   grid-template-columns: 1fr 1fr;
 }
 
-
+.bold-text {
+  font-weight: bold;
+}
 

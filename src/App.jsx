@@ -5,7 +5,7 @@ import fetchPrice from './pages/fetchPrice';
 import { ABIVeSeaGetProfile, ABIWoVGetAccountProperties } from './pages/ABI';
 import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
-import getImageForCollection from './pages/getImageForCollection';
+// import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
 
 const connex = new Connex({
@@ -15,12 +15,14 @@ const connex = new Connex({
 
 
 
-const startDateTimeString = "10/4/23 12:00 AM PST";
+const startDateTimeString = "10/5/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
 
-const endDateTimeString = "10/4/23 11:59 PM PST";
+const endDateTimeString = "10/5/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
+
+
 
 export default function App() {
   const [transfers, setTransfers] = useState([]);
@@ -245,8 +247,8 @@ export default function App() {
                   vetAmount = 0;
                   break;
               }
-
-              return vetAmount + " VET";
+              const vetAmountString = vetAmount.toFixed()
+              return vetAmountString + " VET";
             };
 
             const nftAddress = (() => {
@@ -407,9 +409,9 @@ export default function App() {
         <div className='collections'>
           <h2>Top 5 Collections by $VET</h2>
           <ul style={{listStyleType:"none"}}>
-              {Object.entries(collectionAmt).map(([collection, count]) => (
+              {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
-                  <p>
+                  <p className={index === 0 ? 'bold-text' : ''}>
                     {count[0]} with a total of {count[1]} vet
                   </p>
                 </li>
@@ -427,17 +429,15 @@ export default function App() {
         key={index}
         style={{ border: "1px solid white", display: "block" }}
                 >
-          <p>number: {transfer.number}</p>
-          <p>type: {transfer.type}</p>
           <p>buyer: {transfer.buyer}</p>
           <p>price: {transfer.price}</p>
           <p>collection: {transfer.collection}</p>
-          <p>nftAddress: {transfer.nftAddress}</p>
           <p>tokenID: {transfer.tokenId}</p>
+          <p>type: {transfer.type}</p>
           <p>
-                    Time:{" "}
-                    {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
-                  </p>
+            Time:{" "}
+            {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
+          </p>
         </li>
       )}
       </ul>
