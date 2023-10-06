@@ -7,6 +7,8 @@ import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
 // import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
+import exo from '../src/assets/exo.webp'
+import { decode } from 'punycode';
 
 const connex = new Connex({
     node: 'https://mainnet.veblocks.net/', 
@@ -420,7 +422,7 @@ export default function App() {
         </div>
         
       </div>
-
+                
 
       <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr', gap: "10px"}}>
       {transfers.map((transfer, index) => 
