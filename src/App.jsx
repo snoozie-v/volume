@@ -8,6 +8,7 @@ import nftCollections from './pages/nftCollections';
 // import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
 
+
 const connex = new Connex({
     node: 'https://mainnet.veblocks.net/', 
     network: 'main' 
@@ -25,6 +26,7 @@ export default function App() {
   const [totalCount, setTotalCount] = useState(0);
   const [vetCount, setVetCount] = useState(0);
   const [collectionAmt, setCollectionAmt] = useState({})
+  const [marketplaceData, setMarketplaceData] = useState({})
 
   useEffect(() => {
     async function getHistoryFor() {
@@ -40,7 +42,7 @@ export default function App() {
           .apply(0, 200);
 
           // view logs 
-          // console.log("logs", logs)
+          console.log("logs", logs)
         const splitHexData = (hexData, numParts) => {
           const cleanHex = hexData.startsWith("0x")
             ? hexData.slice(2)
@@ -133,18 +135,29 @@ export default function App() {
                 break;
 
               case "0x59a66f40592e9f6c438e82187c8cdb4cf6659e31a50187c8b1346defac648135":
-                  const [part22, part23] = splitHexData(log.data, 3);
+                  const [part22, part23] = splitHexData(log.data, 2);
                   decodedLog = {
                     type: "ExoWorlds newSale",
                     topics: log.topics,
                     data:[part22, part23],
                     meta: log.meta
                   };
-                  console.log("exo", decodedLog)
                   break;
+                
+              case "0xb2f957e6e6ed6377e70534f97fc23756b916174a0228bf795ee7d21597c5f637":
+                    const [part24] = splitHexData(log.data, 1);
+                    decodedLog = {
+                      type: "VPunks AuctionSuccessful",
+                      topics: log.topics,
+                      data: [part24],
+                      meta: log.meta
+                    }
+
+                    break;
+                
               default:
-                console.log("default case");
-                break;
+                    console.log("default case");
+                    break;             
             }
 
             const getBuyer = (transfer) => {
@@ -163,7 +176,9 @@ export default function App() {
                   return "0x" + transfer.data[0].substring(24);
                 case "ExoWorlds newSale":
                   return "0x" + transfer.data[0].substring(24)
-                default:
+                case "VPunks AuctionSuccessful":
+                  return "0x" + transfer.topics[1].substring(26);
+                  default:
                   return "Unknown Buyer";
               }
             };
@@ -184,7 +199,9 @@ export default function App() {
                   return parseInt(transfer.topics[2], 16);
                 case "ExoWorlds newSale":
                   return parseInt(transfer.topics[3], 16)
-                default:
+                case "VPunks AuctionSuccessful":
+                  return parseInt(transfer.topics[3], 16)
+                  default:
                   return "Unknown Token ID";
               }
             };
@@ -201,7 +218,11 @@ export default function App() {
                   vetAmount = parseInt(transfer.data[1], 16) / Math.pow(10, 18);
                   break;
 
-                case "WOV Offer Accepted":
+                case "VPunks AuctionSuccessful":
+                  vetAmount = parseInt(transfer.data[0], 16) / Math.pow(10, 18)
+                  break;
+
+                  case "WOV Offer Accepted":
                   if (
                     transfer.data[3] ===
                     "00000000000000000000000045429a2255e7248e57fce99e7239aed3f84b7a53"
@@ -261,7 +282,9 @@ export default function App() {
                 case "Vesea Collection Offer Accepted":
                   return "0x" + log.topics[1].substring(26);
                 case "ExoWorlds newSale":
-                  return "0x3473c5282057D7BeDA96C1ce0FE708e890764009"
+                  return "0x3473c5282057D7BeDA96C1ce0FE708e890764009";
+                case "VPunks AuctionSuccessful":
+                  return "0xe92fddd633008c1bca6e738725d2190cd46df4a1";
                 default:
                   return "Unknown NFT Address";
               }
@@ -270,8 +293,6 @@ export default function App() {
             
 
             const buyer = getBuyer(decodedLog)
-   
-
 
             const getProfileName = async (buyer) => {
             const wovNickName = await connex.thor
@@ -289,8 +310,9 @@ export default function App() {
                 return veSeaProfile.decoded[0][1]
               }
               return buyer
-
             }
+
+
             const profileName = await getProfileName(buyer)
             decodedLog.buyer = profileName
             
@@ -309,15 +331,66 @@ export default function App() {
             return decodedLog;
           })
         );
-        console.log("formattedTransfers", formattedTransfers)
+        console.log("formatted transfers", formattedTransfers)
         setTransfers(formattedTransfers);
+
 
         const amounts = {};
         const quantities = {};
         const collectionAmounts = {};
+        const marketplaceAmounts = {}
 
         let totalCount = 0;
         let vetCount = 0;
+        for (const transfer of formattedTransfers) {
+          const transferType = transfer.type;
+          if (marketplaceAmounts[transferType]) {
+            marketplaceAmounts[transferType] += parseFloat(transfer.price)
+          } else {
+            marketplaceAmounts[transferType] = parseFloat(transfer.price)
+          }
+        }
+
+        const transferTypeAmountsArray = Object.entries(marketplaceAmounts)
+   
+
+        const consolidatedMarketplaces = {
+          'Vesea': 0,
+          'WOV': 0,
+          'BVM': 0,
+          'EXO': 0,
+          'VPunks': 0,
+        };
+        
+        // Iterate through the marketplaceAmountsArray and consolidate the amounts
+        for (const [marketplaceType, amount] of transferTypeAmountsArray) {
+          switch (marketplaceType) {
+            case 'Vesea Purchase':
+            case 'Vesea Offer Accepted':
+            case 'Vesea Collection Offer Accepted':
+              consolidatedMarketplaces['Vesea'] += amount;
+              break;
+            case 'WOV Purchase':
+            case 'WOV Offer Accepted':
+              consolidatedMarketplaces['WOV'] += amount;
+              break;
+            case 'BVM Purchase':
+              consolidatedMarketplaces['BVM'] += amount;
+              break;
+            case 'ExoWorlds newSale':
+              consolidatedMarketplaces['EXO'] += amount;
+              break;
+            case 'VPunks AuctionSuccessful':
+              consolidatedMarketplaces['VPunks'] += amount;
+              break;
+            default:
+              consolidatedMarketplaces['Other'] += amount;
+              break;
+          }
+        }
+        const marketplaces = Object.entries(consolidatedMarketplaces)
+        marketplaces.sort((a, b) => b[1] - a[1])
+        
 
         for (const transfer of formattedTransfers) {
           const collectionName = transfer.collection;
@@ -338,7 +411,8 @@ export default function App() {
 
         for (const transfer of formattedTransfers) {
           const wallet = transfer.buyer;
-
+       
+          
           if (quantities[wallet]) {
             quantities[wallet]++;
           } else {
@@ -364,8 +438,9 @@ export default function App() {
         amountsArray.sort((a, b) => b[1] - a[1]);
         const top5Collector = amountsArray.slice(0, 5)
         const sortedAmounts = Object.fromEntries(top5Collector);
+        
 
-
+        setMarketplaceData(marketplaces)
         setWalletAmounts(sortedAmounts);
         setTotalCount(totalCount);
         setVetCount(vetCount);
@@ -380,40 +455,56 @@ export default function App() {
 
   return (
     <>
-    
+
+    <h1>vechain nft volume</h1>
       <div className='hero'>
-      <h1>vechain nft volume</h1>
-        <div className='times'>
+      
+      <div className='times'>
+        <h2>Time Period</h2>
           <p>Start: {startDateTimeString}</p> 
           <p>End: {endDateTimeString}</p> 
           <p>Count: {totalCount}</p> 
-          <p>Total: {vetCount} vet</p>
+          <p>Total: {vetCount} $VET</p>
         </div>
+
+        <div className='marketplaces'>
+          <h2>Markeplaces</h2>
+          <ul style={{listStyleType:"none"}}>
+              {Object.entries(marketplaceData).map(([mp, count], index) => (
+                <li key={mp}>
+                  <p className={index === 0 ? 'bold-text' : ''}>
+                    {count[0]} with a total of {count[1]} $VET
+                  </p>
+                </li>
+              ))}
+          </ul>
+        </div>
+
+
         <div className='collectors'>
-          <h2>Top 5 Collectors by $VET</h2>
+          <h2>Top 5 Collectors</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(walletAmounts).map(([wallet, count]) =>(
                 <li key={wallet}>
                   <p>
-                  {wallet} with {count} 
+                  {wallet} with {count} $VET
                   </p>
                 </li>
               ))}
           </ul>
         </div>
         <div className='collections'>
-          <h2>Top 5 Collections by $VET</h2>
+          <h2>Top 5 Collections</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} with a total of {count[1]} vet
+                    {count[0]} with a total of {count[1]} $VET
                   </p>
                 </li>
               ))}
           </ul>
-        </div>
-        
+        </div>      
       </div>
                 
 
@@ -422,7 +513,7 @@ export default function App() {
       
       <li 
         key={index}
-        style={{ border: "1px solid white", display: "block" }}
+        style={{ border: "1px solid white", display: "block", borderRadius: "3%" }}
                 >
           <p>buyer: {transfer.buyer}</p>
           <p>price: {transfer.price}</p>
