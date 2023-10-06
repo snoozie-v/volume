@@ -17,11 +17,11 @@ const connex = new Connex({
 
 
 
-const startDateTimeString = "10/5/23 12:00 AM PST";
+const startDateTimeString = "10/6/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
 
-const endDateTimeString = "10/5/23 11:59 PM PST";
+const endDateTimeString = "10/6/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 
