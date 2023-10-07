@@ -14,10 +14,10 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const startDateTimeString = "10/6/23 12:00 AM PST";
+const startDateTimeString = "10/7/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
-const endDateTimeString = "10/6/23 11:59 PM PST";
+const endDateTimeString = "10/7/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 export default function App() {
