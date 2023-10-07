@@ -355,11 +355,11 @@ export default function App() {
    
 
         const consolidatedMarketplaces = {
-          'Vesea': 0,
-          'WOV': 0,
-          'BVM': 0,
-          'EXO': 0,
-          'VPunks': 0,
+          'VeSea @VeSeaOfficial': 0,
+          'WOV @worldofv_art': 0,
+          'BVM @BlackVeMarket': 0,
+          'Exo @ExoWorldsNFT': 0,
+          'VPunks @vpunksofficial': 0,
         };
         
         // Iterate through the marketplaceAmountsArray and consolidate the amounts
@@ -368,20 +368,20 @@ export default function App() {
             case 'Vesea Purchase':
             case 'Vesea Offer Accepted':
             case 'Vesea Collection Offer Accepted':
-              consolidatedMarketplaces['Vesea'] += amount;
+              consolidatedMarketplaces['VeSea @VeSeaOfficial'] += amount;
               break;
             case 'WOV Purchase':
             case 'WOV Offer Accepted':
-              consolidatedMarketplaces['WOV'] += amount;
+              consolidatedMarketplaces['WOV @worldofv_art'] += amount;
               break;
             case 'BVM Purchase':
-              consolidatedMarketplaces['BVM'] += amount;
+              consolidatedMarketplaces['BVM @BlackVeMarket'] += amount;
               break;
             case 'ExoWorlds newSale':
-              consolidatedMarketplaces['EXO'] += amount;
+              consolidatedMarketplaces['Exo @ExoWorldsNFT'] += amount;
               break;
             case 'VPunks AuctionSuccessful':
-              consolidatedMarketplaces['VPunks'] += amount;
+              consolidatedMarketplaces['VPunks @vpunksofficial'] += amount;
               break;
             default:
               consolidatedMarketplaces['Other'] += amount;
@@ -473,7 +473,7 @@ export default function App() {
               {Object.entries(marketplaceData).map(([mp, count], index) => (
                 <li key={mp}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} with a total of {count[1]} $VET
+                    {count[0]} - total: {count[1]} $VET
                   </p>
                 </li>
               ))}
@@ -487,7 +487,7 @@ export default function App() {
               {Object.entries(walletAmounts).map(([wallet, count]) =>(
                 <li key={wallet}>
                   <p>
-                  {wallet} with {count} $VET
+                  {wallet} - total: {count} $VET
                   </p>
                 </li>
               ))}
@@ -499,7 +499,7 @@ export default function App() {
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} with a total of {count[1]} $VET
+                    {count[0]} - total: {count[1]} $VET
                   </p>
                 </li>
               ))}
