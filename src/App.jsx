@@ -14,10 +14,10 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const startDateTimeString = "10/7/23 12:00 AM PST";
+const startDateTimeString = "10/8/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
-const endDateTimeString = "10/7/23 11:59 PM PST";
+const endDateTimeString = "10/8/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 export default function App() {
@@ -456,8 +456,8 @@ export default function App() {
   return (
     <>
 
-    <h1>vechain nft volume</h1>
-      <div className='hero'>
+    <h1>vechain sales tracker</h1>
+      <div className='wrapper'>
       
       <div className='times'>
         <h2>Time Period</h2>
@@ -508,12 +508,12 @@ export default function App() {
       </div>
                 
 
-      <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr', gap: "10px"}}>
+      <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: "10px"}}>
       {transfers.map((transfer, index) => 
       
       <li 
         key={index}
-        style={{ border: "1px solid white", display: "block", borderRadius: "3%" }}
+        style={{ border: "1px solid white", display: "block", borderRadius: "3%", minWidth: "280px", maxWidth: "325px" }}
                 >
           <p>buyer: {transfer.buyer}</p>
           <p>price: {transfer.price}</p>
