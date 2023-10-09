@@ -455,20 +455,24 @@ export default function App() {
 
   return (
     <>
+    <div className='navBar'>
+      <div className='home'><a href="https://www.non-fungiblenews.com/">Home</a></div>
+      <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
+    </div>
 
     <h1>vechain sales tracker</h1>
       <div className='wrapper'>
       
-      <div className='times'>
+      <div className='times item'>
         <h2>Time Period</h2>
-          <p>Start: {startDateTimeString}</p> 
+          <p className='stat'>Start: {startDateTimeString}</p> 
           <p>End: {endDateTimeString}</p> 
           <p>Count: {totalCount}</p> 
           <p>Total: {vetCount} $VET</p>
         </div>
 
-        <div className='marketplaces'>
-          <h2>Markeplaces</h2>
+        <div className='marketplaces item'>
+          <h2>Marketplaces</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(marketplaceData).map(([mp, count], index) => (
                 <li key={mp}>
@@ -481,19 +485,19 @@ export default function App() {
         </div>
 
 
-        <div className='collectors'>
+        <div className='collectors item'>
           <h2>Top 5 Collectors</h2>
           <ul style={{listStyleType:"none"}}>
-              {Object.entries(walletAmounts).map(([wallet, count]) =>(
+              {Object.entries(walletAmounts).map(([wallet, count], index) =>(
                 <li key={wallet}>
-                  <p>
+                  <p className={index === 0 ? 'bold-text' : ''}>
                   {wallet} - total: {count} $VET
                   </p>
                 </li>
               ))}
           </ul>
         </div>
-        <div className='collections'>
+        <div className='collections item'>
           <h2>Top 5 Collections</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count], index) => (
@@ -506,8 +510,8 @@ export default function App() {
           </ul>
         </div>      
       </div>
-                
-
+          <h3 className='transfer-title'>transfers:</h3>
+      <div className='transfers'>
       <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: "10px"}}>
       {transfers.map((transfer, index) => 
       
@@ -527,6 +531,7 @@ export default function App() {
         </li>
       )}
       </ul>
+      </div>
     </>
   )
 }

@@ -1,24 +1,71 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 5px auto;
   /* text-align: center; */
 }
 
 .wrapper {
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 100px 1fr 1fr 100px;
+  grid-template-rows: 1fr 5px 1fr;
+  background-color: white;
+  border: 3px solid grey;
+  padding: 15px;
+  gap: 5px;
 }
 
+.item {
+  background-color: #1e293b;
+  border-radius: 5%;
+  padding: 15px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.times {
+  grid-column: 2;
+}
+
+.stat {
+  font-size: 3rem;
+}
+
+.marketplaces {
+  background-color: #1e293b;
+}
+.collectors {
+  grid-column: 2;
+  grid-row: 3;
+
+}
+.collections {
+  grid-column: 3;
+  grid-row: 3;
+}
+.transfers {
+  padding-left: 100px;
+  padding-right: 100px
+}
 .bold-text {
   font-weight: bold;
 }
 
-.marketplaces {
-  display: flex;
-  flex-direction: column;
-
+.wrapper p {
+  font-size: 1.5rem;
 }
 
-
+.navBar {
+  height: 55px;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  gap: 1em;
+  font-size: 1.25em;
+  align-items: center;
+  color: yellow;
+}
+.home {
+  margin-left: 40px
+}

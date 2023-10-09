@@ -112,7 +112,7 @@ const nftCollections = [
     {"id":116,"name":"World of V Genesis Cards","title":"World of V Genesis Cards", "creator":"World of V", "banner":"","nftAddress":"0x93ae8aab337e58a6978e166f8132f59652ca6c56"},
     {"id":117,"name":"VeAce", "title": "VeAce", "banner": "", "nftAddress":"0xc8ebcecb1438b9a00ea1003c956c3e0b83aa0ec3"},
     {"id":118,"name":"VeBounce", "title": "VeBounce", "banner":"", "nftAddress":"0x4167d527340afa546bb88d5d83afb6272e48b40e"},
-    {"id":119,"name":"World of V Community NFTs", "title":"World of V Community NFTs", "banner":"", "nftAddress":"0x5e6265680087520dc022d75f4c45f9ccd712ba97"},
+    {"id":119,"name":"WoV Community NFTs", "title":"WoV Community NFTs", "banner":"", "nftAddress":"0x5e6265680087520dc022d75f4c45f9ccd712ba97"},
     {"id":120,"name":"VPunks", "title":"VPunks", "banner":"", "nftAddress":"0xe92fddd633008c1bca6e738725d2190cd46df4a1"},
     {"id":121,"name":"Mino Mob Mutants", "title":"Mino Mob Mutants", "banner": "", "nftAddress":"0x523bef286ac6b08eb1a9db765970852b086903fa"},
     {"id":122,"name":"OG Wizard Punks", "title":"OG Wizard Punks", "banner":"", "nftAddress": "0xb6ad388aee8d88185c52d1a18bb81c28c567a394"},
