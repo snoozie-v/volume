@@ -14,7 +14,7 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const startDateTimeString = "10/9/23 12:00 AM PST";
+const startDateTimeString = "10/1/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
 const endDateTimeString = "10/9/23 11:59 PM PST";
@@ -31,18 +31,36 @@ export default function App() {
   useEffect(() => {
     async function getHistoryFor() {
       try {
-        const logs = await connex.thor
-          .filter("event", filters)
-          .range({
-            unit: "time",
-            from: startTimeStamp,
-            to: endTimeStamp
-          })
-          .order("desc")
-          .apply(0, 200);
-
-          // view logs 
-          console.log("logs", logs)
+        let logs = []; // Initialize an empty array to store logs
+        let offset = 0; // Initialize an offset for pagination
+        const batchSize = 200; // Set the batch size
+      
+        while (true) {
+          // Fetch logs in batches
+          const batchLogs = await connex.thor
+            .filter("event", filters)
+            .range({
+              unit: "time",
+              from: startTimeStamp,
+              to: endTimeStamp
+            })
+            .order("desc")
+            .apply(offset, batchSize);
+      
+          // If no more logs are found, exit the loop
+          if (batchLogs.length === 0) {
+            break;
+          }
+      
+          // Concatenate batchLogs to the logs array
+          logs = logs.concat(batchLogs);
+      
+          // Increment the offset for the next batch
+          offset += batchSize;
+        }
+      
+        // View logs
+        console.log("logs", logs);
         const splitHexData = (hexData, numParts) => {
           const cleanHex = hexData.startsWith("0x")
             ? hexData.slice(2)
@@ -455,6 +473,7 @@ export default function App() {
 
   return (
     <>
+ 
     <div className='navBar'>
       <div className='home'><a href="https://www.non-fungiblenews.com/">Home</a></div>
       <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
@@ -511,28 +530,36 @@ export default function App() {
         </div>      
       </div>
           <h3 className='transfer-title'>transfers:</h3>
-      <div className='transfers'>
-      <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: "10px"}}>
-      {transfers.map((transfer, index) => 
-      
-      <li 
-        key={index}
-        style={{ border: "1px solid white", display: "block", borderRadius: "3%", minWidth: "280px", maxWidth: "325px" }}
-                >
-          <p>buyer: {transfer.buyer}</p>
-          <p>price: {transfer.price}</p>
-          <p>collection: {transfer.collection}</p>
-          <p>tokenID: {transfer.tokenId}</p>
-          <p>type: {transfer.type}</p>
-          <p>
-            Time:{" "}
-            {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
-          </p>
-        </li>
-      )}
+          <div className='transfers'>
+      <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: "10px" }}>
+        {transfers && transfers.length > 0 ? (
+          transfers.map((transfer, index) => (
+            <li
+              key={index}
+              style={{
+                border: "1px solid white",
+                display: "block",
+                borderRadius: "3%",
+                minWidth: "280px",
+                maxWidth: "325px",
+              }}
+            >
+              <p>buyer: {transfer.buyer}</p>
+              <p>price: {transfer.price}</p>
+              <p>collection: {transfer.collection}</p>
+              <p>tokenID: {transfer.tokenId}</p>
+              <p>type: {transfer.type}</p>
+              <p>
+                Time:{" "}
+                {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
+              </p>
+            </li>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </ul>
-      </div>
-    </>
-  )
-}
-
+    </div>
+  </>
+);
+        }

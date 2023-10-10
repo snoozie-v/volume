@@ -125,7 +125,10 @@ const nftCollections = [
     {"id":129,"name":"Banana Crack", "title":"Banana Crack", "banner":"", "nftAddress":"0xd7a8b0cebed38164c463e39f9f433daf963c5cfb"},
     {"id":130,"name":"BABY MINGOS", "title":"BABY MINGOS", "banner":"", "nftAddress":"0x42ac6537c8d4d7c5c8a18984e5ac8d32efd35d96"},
     {"id":131,"name":"Bored Eagle Fight Club", "title":"Bored Eagle Fight Club", "banner":"", "nftAddress":"0x2f0586faa4b51a678cf5d0f27ce414f3f6d08517"},
-    {"id":132,"name":"Ocean Diver", "title":"Ocean Diver", "banner":"", "nftAddress":"0xa4a04efe50a0c18d9a85b486ffc10af0d3423de9"}
+    {"id":132,"name":"Ocean Diver", "title":"Ocean Diver", "banner":"", "nftAddress":"0xa4a04efe50a0c18d9a85b486ffc10af0d3423de9"},
+    {"id":133,"name":"Jungle Buildings", "title":"Jungle Buildings", "banner":"", "nftAddress":"0xd68ea9f36870aa4195cbe992eca0765d13a133fd"},
+    {"id":134,"name":"Tradze Town", "title":"Tradze Town", "banner":"", "nftAddress":"0xb68f43cf91a2c9fa3f8ab369cb2fb23511eb7fb7"},
+    
   ]
 
   export default nftCollections;
