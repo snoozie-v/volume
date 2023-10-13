@@ -132,7 +132,7 @@ const nftCollections = [
     {"id":136,"name":"GangsterGorillazPetz", "title":"GangterGorillazPetz", "banner":"","nftAddress":"0x6cb68e47080db4e3574f8a50df6717eeb32e0269"},
     {"id":137,"name":"Jungle Plots","title":"Jungle Plots", "banner":"", "nftAddress":"0xc0327e7e13df8b578ad57b8a1aed2a4e001addb3"},
     {"id":138,"name":"KokNextGen","title":"KokNextGen", "banner":"", "nftAddress":"0x0d969ded31c4185ac9e44ba93414a3a0dba8ab65"},
-    
+    {"id":139,"name":"VeTags","title":"VeTags","banner":"","nftAddress":"0x4e34c1de5557e8464edc7519a416148f332a8d05"},
   ]
 
   export default nftCollections;
