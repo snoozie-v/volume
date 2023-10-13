@@ -128,6 +128,10 @@ const nftCollections = [
     {"id":132,"name":"Ocean Diver", "title":"Ocean Diver", "banner":"", "nftAddress":"0xa4a04efe50a0c18d9a85b486ffc10af0d3423de9"},
     {"id":133,"name":"Jungle Buildings", "title":"Jungle Buildings", "banner":"", "nftAddress":"0xd68ea9f36870aa4195cbe992eca0765d13a133fd"},
     {"id":134,"name":"Tradze Town", "title":"Tradze Town", "banner":"", "nftAddress":"0xb68f43cf91a2c9fa3f8ab369cb2fb23511eb7fb7"},
+    {"id":135,"name":"NonFungiBulls","title":"NonFungiBulls", "banner":"","nftAddress":"0xd64ae647c44bc1d2edde7c65d9605a0024b86c78"},
+    {"id":136,"name":"GangsterGorillazPetz", "title":"GangterGorillazPetz", "banner":"","nftAddress":"0x6cb68e47080db4e3574f8a50df6717eeb32e0269"},
+    {"id":137,"name":"Jungle Plots","title":"Jungle Plots", "banner":"", "nftAddress":"0xc0327e7e13df8b578ad57b8a1aed2a4e001addb3"},
+    {"id":138,"name":"KokNextGen","title":"KokNextGen", "banner":"", "nftAddress":"0x0d969ded31c4185ac9e44ba93414a3a0dba8ab65"},
     
   ]
 
