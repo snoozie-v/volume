@@ -46,8 +46,8 @@
   grid-row: 3;
 }
 .transfers {
-  padding-left: 100px;
-  padding-right: 100px
+  padding-left: 50px;
+  padding-right: 100px;
 }
 .bold-text {
   font-weight: bold;
@@ -71,6 +71,7 @@
   margin-left: 40px
 }
 
+
 @media (max-width: 1200px){
   .wrapper {
     display: flex;
@@ -84,4 +85,6 @@
     min-width: 350px;
     padding: 5px;
   }
+
+  
 }

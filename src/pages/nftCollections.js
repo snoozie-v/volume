@@ -109,7 +109,7 @@ const nftCollections = [
     {"id":113,"name":"bomber_squad_coins","title":"Bomber Squad Coins","creator":"Bomber Squad Coins","banner":"images\/bomber-squad-coins-banner.webp","marketplace":"vesea","nftAddress":"0x2e53f17aa7dcbd00ec3eb80388f509faf84edafa"},
     {"id":114,"name":"old guardians","title":"old Guardians","creator":"VictuhVictuh","banner":"images\/guardians-banner.webp","marketplace":"vesea","nftAddress":"0x0403745444204d1a0218cecbfe70b2ea42d654a6"},
     {"id":115,"name":"old metaversials_alteregos","title":"old Metaversials Alter-egos","creator":"Pizzu","banner":"images\/metaversials-alter-egos-banner.webp","marketplace":"vesea","nftAddress":"0xfd5e344798ceb51afd910fafae9768e4d093a725"},
-    {"id":116,"name":"World of V Genesis Cards","title":"World of V Genesis Cards", "creator":"World of V", "banner":"","nftAddress":"0x93ae8aab337e58a6978e166f8132f59652ca6c56"},
+    {"id":116,"name":"WoV Genesis Cards","title":"WoV Genesis Cards", "creator":"World of V", "banner":"","nftAddress":"0x93ae8aab337e58a6978e166f8132f59652ca6c56"},
     {"id":117,"name":"VeAce", "title": "VeAce", "banner": "", "nftAddress":"0xc8ebcecb1438b9a00ea1003c956c3e0b83aa0ec3"},
     {"id":118,"name":"VeBounce", "title": "VeBounce", "banner":"", "nftAddress":"0x4167d527340afa546bb88d5d83afb6272e48b40e"},
     {"id":119,"name":"WoV Community NFTs", "title":"WoV Community NFTs", "banner":"", "nftAddress":"0x5e6265680087520dc022d75f4c45f9ccd712ba97"},

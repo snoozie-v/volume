@@ -373,11 +373,11 @@ export default function App() {
    
 
         const consolidatedMarketplaces = {
-          'VeSea @VeSeaOfficial': 0,
-          'WOV @worldofv_art': 0,
-          'BVM @BlackVeMarket': 0,
-          'Exo @ExoWorldsNFT': 0,
-          'VPunks @vpunksofficial': 0,
+          'VeSea': 0,
+          'WOV': 0,
+          'BVM': 0,
+          'Exo': 0,
+          'VPunks': 0,
         };
         
         // Iterate through the marketplaceAmountsArray and consolidate the amounts
@@ -386,20 +386,20 @@ export default function App() {
             case 'Vesea Purchase':
             case 'Vesea Offer Accepted':
             case 'Vesea Collection Offer Accepted':
-              consolidatedMarketplaces['VeSea @VeSeaOfficial'] += amount;
+              consolidatedMarketplaces['VeSea'] += amount;
               break;
             case 'WOV Purchase':
             case 'WOV Offer Accepted':
-              consolidatedMarketplaces['WOV @worldofv_art'] += amount;
+              consolidatedMarketplaces['WOV'] += amount;
               break;
             case 'BVM Purchase':
-              consolidatedMarketplaces['BVM @BlackVeMarket'] += amount;
+              consolidatedMarketplaces['BVM'] += amount;
               break;
             case 'ExoWorlds newSale':
-              consolidatedMarketplaces['Exo @ExoWorldsNFT'] += amount;
+              consolidatedMarketplaces['Exo'] += amount;
               break;
             case 'VPunks AuctionSuccessful':
-              consolidatedMarketplaces['VPunks @vpunksofficial'] += amount;
+              consolidatedMarketplaces['VPunks'] += amount;
               break;
             default:
               consolidatedMarketplaces['Other'] += amount;
@@ -496,7 +496,7 @@ export default function App() {
               {Object.entries(marketplaceData).map(([mp, count], index) => (
                 <li key={mp}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} - total: {count[1]} $VET
+                    {count[0]} - {count[1]} $VET
                   </p>
                 </li>
               ))}
@@ -510,7 +510,7 @@ export default function App() {
               {Object.entries(walletAmounts).map(([wallet, count], index) =>(
                 <li key={wallet}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                  {wallet} - total: {count} $VET
+                  {wallet} - {count} $VET
                   </p>
                 </li>
               ))}
@@ -522,7 +522,7 @@ export default function App() {
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} - total: {count[1]} $VET
+                    {count[0]} - {count[1]} $VET
                   </p>
                 </li>
               ))}
@@ -531,11 +531,12 @@ export default function App() {
       </div>
           <h3 className='transfer-title'>transfers:</h3>
           <div className='transfers'>
-      <ul style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <ul className='transfers-list' style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {transfers && transfers.length > 0 ? (
           transfers.map((transfer, index) => (
             <li
               key={index}
+              className='transfers-item'
               style={{
                 border: "1px solid white",
                 display: "block",
