@@ -531,7 +531,7 @@ export default function App() {
       </div>
           <h3 className='transfer-title'>transfers:</h3>
           <div className='transfers'>
-      <ul style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: "10px" }}>
+      <ul style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {transfers && transfers.length > 0 ? (
           transfers.map((transfer, index) => (
             <li
@@ -540,8 +540,7 @@ export default function App() {
                 border: "1px solid white",
                 display: "block",
                 borderRadius: "3%",
-                minWidth: "280px",
-                maxWidth: "325px",
+                width: "350px"
               }}
             >
               <p>buyer: {transfer.buyer}</p>

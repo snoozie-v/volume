@@ -13,7 +13,7 @@
   border: 3px solid grey;
   padding: 15px;
   gap: 5px;
-  
+  width: 100%;
 }
 
 .item {
@@ -69,4 +69,19 @@
 }
 .home {
   margin-left: 40px
+}
+
+@media (max-width: 1200px){
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+  }
+
+  .item {
+    max-width: 450px;
+    min-width: 350px;
+    padding: 5px;
+  }
 }
