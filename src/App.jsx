@@ -7,6 +7,7 @@ import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
 // import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
+import updateDates from './pages/updateDates';
 
 
 const connex = new Connex({
@@ -14,11 +15,7 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const startDateTimeString = "10/13/23 12:00 AM PST";
-const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
-const endDateTimeString = "10/13/23 11:59 PM PST";
-const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 export default function App() {
   const [transfers, setTransfers] = useState([]);
@@ -28,9 +25,12 @@ export default function App() {
   const [collectionAmt, setCollectionAmt] = useState({})
   const [marketplaceData, setMarketplaceData] = useState({})
   const [startDate, setStartDate] = useState("")
+  const {startTimeStamp, endTimeStamp, startDateTimeString,
+    endDateTimeString } = updateDates()
+
+  console.log(startTimeStamp, endTimeStamp)
 
   useEffect(() => {
-    console.log("start-date", startDate)
     
     async function getHistoryFor() {
       try {
@@ -560,7 +560,7 @@ export default function App() {
               <p>tokenID: {transfer.tokenId}</p>
               <p>type: {transfer.type}</p>
               <p>
-                Time:{" "}
+                time:{" "}
                 {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
               </p>
             </li>
