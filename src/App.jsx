@@ -14,10 +14,10 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const startDateTimeString = "10/1/23 12:00 AM PST";
+const startDateTimeString = "10/13/23 12:00 AM PST";
 const startTimeStamp = Date.parse(startDateTimeString) / 1000; 
 
-const endDateTimeString = "10/15/23 11:59 PM PST";
+const endDateTimeString = "10/13/23 11:59 PM PST";
 const endTimeStamp = Date.parse(endDateTimeString) / 1000;
 
 export default function App() {
@@ -27,16 +27,19 @@ export default function App() {
   const [vetCount, setVetCount] = useState(0);
   const [collectionAmt, setCollectionAmt] = useState({})
   const [marketplaceData, setMarketplaceData] = useState({})
+  const [startDate, setStartDate] = useState("")
 
   useEffect(() => {
+    console.log("start-date", startDate)
+    
     async function getHistoryFor() {
       try {
-        let logs = []; // Initialize an empty array to store logs
-        let offset = 0; // Initialize an offset for pagination
-        const batchSize = 200; // Set the batch size
+        let logs = []; 
+        let offset = 0; 
+        const batchSize = 200; 
       
         while (true) {
-          // Fetch logs in batches
+
           const batchLogs = await connex.thor
             .filter("event", filters)
             .range({
@@ -47,15 +50,12 @@ export default function App() {
             .order("desc")
             .apply(offset, batchSize);
       
-          // If no more logs are found, exit the loop
+
           if (batchLogs.length === 0) {
             break;
           }
-      
-          // Concatenate batchLogs to the logs array
+
           logs = logs.concat(batchLogs);
-      
-          // Increment the offset for the next batch
           offset += batchSize;
         }
       
@@ -308,8 +308,6 @@ export default function App() {
               }
             })();
 
-            
-
             const buyer = getBuyer(decodedLog)
 
             const getProfileName = async (buyer) => {
@@ -329,7 +327,6 @@ export default function App() {
               }
               return buyer
             }
-
 
             const profileName = await getProfileName(buyer)
             decodedLog.buyer = profileName
@@ -468,7 +465,9 @@ export default function App() {
         console.error(err);
       }
     }
+
     getHistoryFor();
+    
   }, []);
 
   return (
@@ -480,6 +479,17 @@ export default function App() {
     </div>
 
     <h1>vechain sales tracker</h1>
+    {/* <form>
+      <label htmlFor="start-date">Sales By Date:</label>
+    <input 
+      type="date" 
+      id="start-date" 
+      name="start-date" 
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}></input>
+
+    <p>{startDate}</p>
+    </form> */}
       <div className='wrapper'>
       
       <div className='times item'>
