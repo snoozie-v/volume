@@ -493,9 +493,7 @@ export default function App() {
       <div className='wrapper'>
       
       <div className='times item'>
-        <h2>Time Period</h2>
-          <p className='stat'>Start: {startDateTimeString}</p> 
-          <p>End: {endDateTimeString}</p> 
+        <h2>Prev 24 Hour Sales:</h2>
           <p>Count: {totalCount}</p> 
           <p>Total: {vetCount} $VET</p>
         </div>

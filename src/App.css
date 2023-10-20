@@ -29,6 +29,10 @@
   grid-column: 2;
 }
 
+.times h2 {
+  margin-bottom: 10px;
+}
+
 .stat {
   font-size: 3rem;
 }
