@@ -134,7 +134,7 @@ const nftCollections = [
     {"id":138,"name":"KokNextGen","title":"KokNextGen", "banner":"", "nftAddress":"0x0d969ded31c4185ac9e44ba93414a3a0dba8ab65"},
     {"id":139,"name":"VeTags","title":"VeTags","banner":"","nftAddress":"0x4e34c1de5557e8464edc7519a416148f332a8d05"},
     {"id":140,"name":"VeHashes","title":"VeHashes","banner":"","nftAddress":"0x2a7bc6e39bcf51f5c55e7fc779e6b4da30be30c3"},
-    
+    {"id":141,"name":"THE LLAMA FARM CULB CARDS", "title":"THE LLAMA FARM CULB CARDS","banner":"","nftAddress":"0x667Fa698C364178e80830a70a65893Eb6e5baBae"},
   ]
 
   export default nftCollections;
