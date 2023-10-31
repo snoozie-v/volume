@@ -135,6 +135,11 @@ const nftCollections = [
     {"id":139,"name":"VeTags","title":"VeTags","banner":"","nftAddress":"0x4e34c1de5557e8464edc7519a416148f332a8d05"},
     {"id":140,"name":"VeHashes","title":"VeHashes","banner":"","nftAddress":"0x2a7bc6e39bcf51f5c55e7fc779e6b4da30be30c3"},
     {"id":141,"name":"THE LLAMA FARM CULB CARDS", "title":"THE LLAMA FARM CULB CARDS","banner":"","nftAddress":"0x667Fa698C364178e80830a70a65893Eb6e5baBae"},
+    {"id":142,"name":"Pixel Outlaws","title":"Pixel Outlaws","banner":"","nftAddress":"0xdce5A78FE9CBba559c73A83EE40891B8A09516C2"},
+    {"id":143,"name":"The Sagaz Continues","title":"The Sagaz Continues","banner":"","nftAddress":"0x2ab9138a474c9fa9f056d2c7382e058132c9773b"},
+    {"id":144,"name":"LLAMAMON","title":"LLAMAMON","banner":"","nftAddress":"0x7633b0e3c21cc6bacf5780cab8b622b7495666a7"},
+    {"id":145,"name":"VeTower - VeRooms","title":"VeTower - VeRooms","banner":"","nftAddress":"0x6fd65c8ecafebbb505ab74f2e27025058bddc75d"},
+  
   ]
 
   export default nftCollections;

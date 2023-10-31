@@ -549,7 +549,8 @@ export default function App() {
                 border: "1px solid white",
                 display: "block",
                 borderRadius: "3%",
-                width: "350px"
+                width: "350px",
+                boxShadow: "inset -5px -5px 10px rgba(0, 0, 0, 0.5)",
               }}
             >
               <p>buyer: {transfer.buyer}</p>
@@ -561,6 +562,7 @@ export default function App() {
                 time:{" "}
                 {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
               </p>
+              <p>count: {transfer.number}</p>
             </li>
           ))
         ) : (

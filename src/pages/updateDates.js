@@ -4,7 +4,7 @@ function updateDates() {
 
 
   // Calculate the start and end times for a 48-hour window
-  const startDateTime = new Date(now.getTime() - 24 * 60 * 60 * 1000); // 48 hours ago
+  const startDateTime = new Date(now.getTime() - 24 * 60 * 60 * 1000); // 24 hours ago
   const endDateTime = now;
   console.log(endDateTime)
 
