@@ -7,13 +7,17 @@ import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
 // import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
-import updateDates from './pages/updateDates';
+import { getStartOfCurrentMonth, getStartOf24HoursAgo, getStartOfPrevious7Days } from './pages/updateDates';
 
 
 const connex = new Connex({
     node: 'https://mainnet.veblocks.net/', 
     network: 'main' 
 })
+
+const { startDateTime: startOfMonth, endDateTime: endOfMonth } = getStartOfCurrentMonth();
+const { startDateTime: start24HoursAgo, endDateTime: end24HoursAgo } = getStartOf24HoursAgo();
+const { startDateTime: startPrevious7Days, endDateTime: endPrevious7Days } = getStartOfPrevious7Days();
 
 
 
@@ -24,20 +28,57 @@ export default function App() {
   const [vetCount, setVetCount] = useState(0);
   const [collectionAmt, setCollectionAmt] = useState({})
   const [marketplaceData, setMarketplaceData] = useState({})
-  const [startDate, setStartDate] = useState("")
-  const {startTimeStamp, endTimeStamp, startDateTimeString,
-    endDateTimeString } = updateDates()
+  const [selectedRange, setSelectedRange] = useState('This Month'); // Initialize with the default range
+  const [dateRange, setDateRange] = useState({}); // Store start and end dates based on the selected range
+  console.log("selectedRange", selectedRange)
 
-  console.log(startTimeStamp, endTimeStamp)
+  function handleDateRangeChange(range) {
+    setSelectedRange(range);
+    let startDateTime, endDateTime;
+  
+    switch (range) {
+      case 'This Month':
+        startDateTime = startOfMonth;
+        endDateTime = endOfMonth;
+        break;
+      case 'Prev 24Hrs':
+        startDateTime = start24HoursAgo;
+        endDateTime = end24HoursAgo;
+        break;
+      case 'Prev 7 Days':
+        startDateTime = startPrevious7Days;
+        endDateTime = endPrevious7Days;
+        break;
+      default:
+        // Default to 'This Month' if the range is unknown
+        startDateTime = startOfMonth;
+        endDateTime = endOfMonth;
+    }
+    console.log(startDateTime, typeof startDateTime)
+    // Set the date range in the state
+    setDateRange({ startDateTime, endDateTime });
+    
+
+  }
 
   useEffect(() => {
+    // Set the default date range when the component mounts
+    handleDateRangeChange('This Month');
+  }, []);  // Empty dependency array to run only once on component mount
+  
+  useEffect(() => {
+    
     
     async function getHistoryFor() {
       try {
         let logs = []; 
         let offset = 0; 
         const batchSize = 200; 
-      
+        const {startDateTime, endDateTime} = dateRange
+        const startTimeStamp = Math.floor(startDateTime.getTime() / 1000);
+        const endTimeStamp = Math.floor(endDateTime.getTime()/ 1000);
+
+
         while (true) {
 
           const batchLogs = await connex.thor
@@ -84,6 +125,7 @@ export default function App() {
 
             switch (log.topics[0]) {
               case "0xbb7cf2addc576d161c349efe1848029343caab038bd75e9bed6956bcf1a512de":
+                // eslint-disable-next-line no-case-declarations
                 const [part1, part2, part3] = splitHexData(log.data, 3);
                 decodedLog = {
                   type: "BVM Purchase", // Get the user-friendly name
@@ -93,6 +135,7 @@ export default function App() {
                 };
                 break;
               case "0xf206e7b297bafe2d31f147e6050538b35b5dd424b658411bd58cfccfdf7b3781":
+                // eslint-disable-next-line no-case-declarations
                 const [part4, part5, part6] = splitHexData(log.data, 3);
 
                 decodedLog = {
@@ -103,6 +146,7 @@ export default function App() {
                 };
                 break;
               case "0x92cb176169ade86b7d5c29774fdf7c0ae8d778cacf699d69a479fae9b19681d7":
+                // eslint-disable-next-line no-case-declarations
                 const [part7, part8, part9, part10, part20] = splitHexData(
                   log.data,
                   5
@@ -117,6 +161,7 @@ export default function App() {
                 break;
 
               case "0x7df4fb99994dbf47a019499d198c1ba69e18420edf1d0bc9a31cba5ffa531ef0":
+                // eslint-disable-next-line no-case-declarations
                 const [part11, part12, part13, part21] = splitHexData(
                   log.data,
                   4
@@ -471,8 +516,7 @@ export default function App() {
     }
 
     getHistoryFor();
-    
-  }, []);
+  }, [dateRange]);
 
   return (
     <>
@@ -483,22 +527,16 @@ export default function App() {
     </div>
 
     <h1>vechain sales tracker</h1>
-    {/* <form>
-      <label htmlFor="start-date">Sales By Date:</label>
-    <input 
-      type="date" 
-      id="start-date" 
-      name="start-date" 
-      value={startDate}
-      onChange={(e) => setStartDate(e.target.value)}></input>
-
-    <p>{startDate}</p>
-    </form> */}
+      <div style={{display:"flex", gap:"20px", justifyContent:"center"}}>
+      <div onClick={() => handleDateRangeChange('Prev 24Hrs')} style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>Prev 24Hrs</div>
+      <div onClick={() => handleDateRangeChange('Prev 7 Days')}style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>Prev 7 Days</div>
+      <div onClick={() => handleDateRangeChange('This Month')}style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>This Month</div>
+      </div>
       <div className='wrapper'>
       
       <div className='times item'>
-        <p>Start: {startDateTimeString}</p>
-        <p>End: {endDateTimeString}</p>
+        <p>Range: {selectedRange}</p>
+        {/* <p>End: {endDateTimeString}</p> */}
 
           <p>Count: {totalCount}</p> 
           <p>Total: {vetCount} $VET</p>
