@@ -335,7 +335,11 @@ export default function App() {
             const price = await getPrice(decodedLog);
             
             const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase()) 
-            decodedLog.collection = collectionName ? collectionName.title : nftAddress
+            decodedLog.collection = collectionName ? collectionName.title : (() => {
+              console.log(nftAddress);
+              return nftAddress;
+            })();
+
             decodedLog.nftAddress = nftAddress
             decodedLog.price = price;
             decodedLog.tokenId = tokenId;
@@ -493,7 +497,9 @@ export default function App() {
       <div className='wrapper'>
       
       <div className='times item'>
-        <h2>Prev 24 Hour Sales:</h2>
+        <p>Start: {startDateTimeString}</p>
+        <p>End: {endDateTimeString}</p>
+
           <p>Count: {totalCount}</p> 
           <p>Total: {vetCount} $VET</p>
         </div>

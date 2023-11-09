@@ -2,9 +2,15 @@ function updateDates() {
   const now = new Date();
   console.log(now)
 
+  const mountainTimeOffset = 7 * 60 * 60 * 1000; // Mountain Standard Time (MST) offset
 
+  // Set the date to the beginning of November in the Mountain Time Zone
+  const startDateTime = new Date(Date.UTC(now.getUTCFullYear(), 10, 1, 0, 0, 0) + mountainTimeOffset);
+  
+  console.log(startDateTime);
   // Calculate the start and end times for a 48-hour window
-  const startDateTime = new Date(now.getTime() - 24 * 60 * 60 * 1000); // 24 hours ago
+  // const startDateTime = new Date(now.getTime() - 192 * 60 * 60 * 1000);  // 24 hours ago 
+  console.log("start date time", typeof startDateTime)
   const endDateTime = now;
   console.log(endDateTime)
 
