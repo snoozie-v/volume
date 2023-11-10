@@ -20,9 +20,18 @@
   background-color: #1e293b;
   border-radius: 5%;
   padding: 15px;
-  max-width: 600px;
+  max-width: 400px;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item h2 {
+  margin: auto;
+  align-item: center;
+  border-bottom: 1px solid yellow;
 }
 
 .times {
@@ -31,6 +40,7 @@
   gap: 50px;
   margin: 0px;
   padding: 0px;
+
 }
 
 .times p {
@@ -38,19 +48,20 @@
   padding: 0px;
 }
 
-.stat {
-  font-size: 3rem;
-}
 
 .marketplaces {
   grid-column: 2;
 }
 .collectors {
   grid-column: 3;
+
 }
 .collections {
   grid-column: 4;
+}
 
+.collections h2 {
+  margin
 }
 .transfers {
   padding-left: 30px;
@@ -120,6 +131,14 @@
   border: 1px solid lightgrey;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selector:hover {
+  background-color: darkgray;
+  cursor: pointer;
 }
 
 .selector span {
@@ -160,8 +179,8 @@
     border: 1px solid white;
     display: block;
     border-radius: 3%;
-    max-width: 250px;
-    min-width: 250px;
+    max-width: 300px;
+    min-width: 300px;
     background-color: lightgrey;
     padding: 0px;
   }
@@ -187,11 +206,11 @@
     max-width: 300px;
     min-width: 300px;
     padding: 15px;
-    font-size: .9rem;
+
   }
 
   .item p {
-    font-size: 1rem;
+
     padding: 0px;
     margin: 0px;
     
@@ -199,6 +218,7 @@
 
   .transfers.list {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
   }
@@ -206,8 +226,8 @@
     border: 1px solid white;
     display: block;
     border-radius: 3%;
-    max-width: 250px;
-    min-width: 250px;
+    max-width: 300px;
+    min-width: 300px;
     background-color: lightgrey;
     padding: 5px;
   }

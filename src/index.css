@@ -42,7 +42,7 @@ h1 {
 h2 {
   font-size: 2.1em;
   line-height: 1.1;
-  margin: 0
+  align-text: center;
 }
 
 
@@ -59,7 +59,7 @@ ul {
 }
 
 p {
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 @media (prefers-color-scheme: light) {

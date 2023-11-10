@@ -528,16 +528,16 @@ export default function App() {
 
     <h1>vechain sales history</h1>
     <div className='times'>
-          <p>current range: {selectedRange}</p>
+          <p>range: {selectedRange}</p>
           <p>count: {totalCount}</p> 
           <p>total $VET: {vetCount}</p>
         </div>
     
       <div className='selector-group'>
         
-      <div className='selector' onClick={() => handleDateRangeChange('prev 24 hrs')} ><span>prev 24 hrs</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('prev 7 days')}><span>prev 7 days</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('prev 30 days')}><span>prev 30 days</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('prev 24 hrs')} ><span>24 hrs</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('prev 7 days')}><span>7 days</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('prev 30 days')}><span>30 days</span></div>
       </div>
 
 
