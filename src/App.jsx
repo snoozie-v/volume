@@ -37,15 +37,15 @@ export default function App() {
     let startDateTime, endDateTime;
   
     switch (range) {
-      case 'Prev 30 Days':
+      case 'prev 30 days':
         startDateTime = startOfMonth;
         endDateTime = endOfMonth;
         break;
-      case 'Prev 24 Hrs':
+      case 'prev 24 hrs':
         startDateTime = start24HoursAgo;
         endDateTime = end24HoursAgo;
         break;
-      case 'Prev 7 Days':
+      case 'prev 7 days':
         startDateTime = startPrevious7Days;
         endDateTime = endPrevious7Days;
         break;
@@ -63,7 +63,7 @@ export default function App() {
 
   useEffect(() => {
     // Set the default date range when the component mounts
-    handleDateRangeChange('Prev 24 Hrs');
+    handleDateRangeChange('prev 24 hrs');
   }, []);  // Empty dependency array to run only once on component mount
   
   useEffect(() => {
@@ -522,27 +522,31 @@ export default function App() {
     <>
  
     <div className='navBar'>
-      <div className='home'><a href="https://www.non-fungiblenews.com/">Home</a></div>
-      <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
+      <div className='home'><a href="https://www.non-fungiblenews.com/">home</a></div>
+      <div className='sales'><a href="https://volume-mauve.vercel.app/">sales-today</a></div>
     </div>
 
     <h1>vechain sales history</h1>
+    <div className='times'>
+          <p>current range: {selectedRange}</p>
+          <p>count: {totalCount}</p> 
+          <p>total $VET: {vetCount}</p>
+        </div>
+    
       <div className='selector-group'>
-      <div className='selector' onClick={() => handleDateRangeChange('Prev 24 Hrs')} ><span>Prev 24Hrs</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('Prev 7 Days')}><span>Prev Week</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('Prev 30 Days')}><span>Prev Month</span></div>
+        
+      <div className='selector' onClick={() => handleDateRangeChange('prev 24 hrs')} ><span>prev 24 hrs</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('prev 7 days')}><span>prev 7 days</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('prev 30 days')}><span>prev 30 days</span></div>
       </div>
+
+
       <div className='wrapper'>
       
-      <div className='times item'>
-        <h2>Time Period</h2>
-          <p>Range: {selectedRange}</p>
-          <p>Count: {totalCount}</p> 
-          <p>Total $VET: {vetCount}</p>
-        </div>
+
 
         <div className='marketplaces item'>
-          <h2>Marketplaces</h2>
+          <h2>marketplaces</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(marketplaceData).map(([mp, count], index) => (
                 <li key={mp}>
@@ -556,7 +560,7 @@ export default function App() {
 
 
         <div className='collectors item'>
-          <h2>Top 5 Collectors</h2>
+          <h2>top 5 collectors</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(walletAmounts).map(([wallet, count], index) =>(
                 <li key={wallet}>
@@ -568,7 +572,7 @@ export default function App() {
           </ul>
         </div>
         <div className='collections item'>
-          <h2>Top 5 Collections</h2>
+          <h2>top 5 collections</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
