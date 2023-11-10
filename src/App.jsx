@@ -63,7 +63,7 @@ export default function App() {
 
   useEffect(() => {
     // Set the default date range when the component mounts
-    handleDateRangeChange('Prev 24Hrs');
+    handleDateRangeChange('Prev 24 Hrs');
   }, []);  // Empty dependency array to run only once on component mount
   
   useEffect(() => {
@@ -535,11 +535,10 @@ export default function App() {
       <div className='wrapper'>
       
       <div className='times item'>
-        <p>Range: {selectedRange}</p>
-        {/* <p>End: {endDateTimeString}</p> */}
-
+        <h2>Time Period</h2>
+          <p>Range: {selectedRange}</p>
           <p>Count: {totalCount}</p> 
-          <p>Total: {vetCount} $VET</p>
+          <p>Total $VET: {vetCount}</p>
         </div>
 
         <div className='marketplaces item'>
