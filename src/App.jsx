@@ -7,7 +7,7 @@ import filters from './pages/filters';
 import nftCollections from './pages/nftCollections';
 // import getImageForCollection from './pages/getImageForCollection';
 import contractToAccount from './pages/contractToAccount';
-import { getStartOfCurrentMonth, getStartOf24HoursAgo, getStartOfPrevious7Days } from './pages/updateDates';
+import { getStartOfMonthAgo, getStartOf24HoursAgo, getStartOfPrevious7Days } from './pages/updateDates';
 
 
 const connex = new Connex({
@@ -15,7 +15,7 @@ const connex = new Connex({
     network: 'main' 
 })
 
-const { startDateTime: startOfMonth, endDateTime: endOfMonth } = getStartOfCurrentMonth();
+const { startDateTime: startOfMonth, endDateTime: endOfMonth } = getStartOfMonthAgo();
 const { startDateTime: start24HoursAgo, endDateTime: end24HoursAgo } = getStartOf24HoursAgo();
 const { startDateTime: startPrevious7Days, endDateTime: endPrevious7Days } = getStartOfPrevious7Days();
 
@@ -37,11 +37,11 @@ export default function App() {
     let startDateTime, endDateTime;
   
     switch (range) {
-      case 'This Month':
+      case 'Prev 30 Days':
         startDateTime = startOfMonth;
         endDateTime = endOfMonth;
         break;
-      case 'Prev 24Hrs':
+      case 'Prev 24 Hrs':
         startDateTime = start24HoursAgo;
         endDateTime = end24HoursAgo;
         break;
@@ -63,7 +63,7 @@ export default function App() {
 
   useEffect(() => {
     // Set the default date range when the component mounts
-    handleDateRangeChange('This Month');
+    handleDateRangeChange('Prev 24Hrs');
   }, []);  // Empty dependency array to run only once on component mount
   
   useEffect(() => {
@@ -526,11 +526,11 @@ export default function App() {
       <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
     </div>
 
-    <h1>vechain sales tracker</h1>
-      <div style={{display:"flex", gap:"20px", justifyContent:"center"}}>
-      <div onClick={() => handleDateRangeChange('Prev 24Hrs')} style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>Prev 24Hrs</div>
-      <div onClick={() => handleDateRangeChange('Prev 7 Days')}style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>Prev 7 Days</div>
-      <div onClick={() => handleDateRangeChange('This Month')}style={{backgroundColor:"yellow",height:"50px",width:"50px",color:"black"}}>This Month</div>
+    <h1>vechain sales history</h1>
+      <div className='selector-group'>
+      <div className='selector' onClick={() => handleDateRangeChange('Prev 24 Hrs')} ><span>Prev 24Hrs</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('Prev 7 Days')}><span>Prev Week</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('Prev 30 Days')}><span>Prev Month</span></div>
       </div>
       <div className='wrapper'>
       

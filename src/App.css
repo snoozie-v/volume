@@ -99,6 +99,29 @@
   text-overflow: ellipsis;
 }
 
+.selector-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.selector {
+  height: 50px;
+  width: 100px;
+  background-color: black;
+  color: yellow;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+}
+
+.selector span {
+  margin: auto;
+}
+
 @media (min-width: 799px) and (max-width: 1090px) {
   .wrapper {
     display: flex;

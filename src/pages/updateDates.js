@@ -1,8 +1,6 @@
-function getStartOfCurrentMonth() {
+function getStartOfMonthAgo() {
   const now = new Date();
-  const mountainTimeOffset = 7 * 60 * 60 * 1000; // Mountain Standard Time (MST) offset
-
-  const startDateTime = new Date(Date.UTC(now.getUTCFullYear(), 10, 1, 0, 0, 0) + mountainTimeOffset);
+  const startDateTime = new Date(now.getTime() - 720 * 60 * 60 * 1000); // 24 hours ago
 
   const endDateTime = now;
 
@@ -34,7 +32,7 @@ function getStartOfPrevious7Days() {
   };
 }
 
-export { getStartOfCurrentMonth, getStartOf24HoursAgo, getStartOfPrevious7Days };
+export { getStartOfMonthAgo, getStartOf24HoursAgo, getStartOfPrevious7Days };
 
   // Format start and end date/time strings
   // const startDateTimeString = startDateTime.toLocaleString('en-US', {
