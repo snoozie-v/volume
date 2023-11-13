@@ -30,22 +30,22 @@ export default function App() {
   const [marketplaceData, setMarketplaceData] = useState({})
   const [selectedRange, setSelectedRange] = useState('This Month'); // Initialize with the default range
   const [dateRange, setDateRange] = useState({}); // Store start and end dates based on the selected range
-  console.log("selectedRange", selectedRange)
+  const [profileLinks, setProfileLinks] = useState({})
 
   function handleDateRangeChange(range) {
     setSelectedRange(range);
     let startDateTime, endDateTime;
   
     switch (range) {
-      case 'prev 30 days':
+      case '30 days':
         startDateTime = startOfMonth;
         endDateTime = endOfMonth;
         break;
-      case 'prev 24 hrs':
+      case '24 hrs':
         startDateTime = start24HoursAgo;
         endDateTime = end24HoursAgo;
         break;
-      case 'prev 7 days':
+      case '7 days':
         startDateTime = startPrevious7Days;
         endDateTime = endPrevious7Days;
         break;
@@ -63,7 +63,7 @@ export default function App() {
 
   useEffect(() => {
     // Set the default date range when the component mounts
-    handleDateRangeChange('prev 24 hrs');
+    handleDateRangeChange('24 hrs');
   }, []);  // Empty dependency array to run only once on component mount
   
   useEffect(() => {
@@ -354,6 +354,17 @@ export default function App() {
             })();
 
             const buyer = getBuyer(decodedLog)
+            console.log(buyer)
+            const buyerProfileLink = `https://vechainstats.com/account/${buyer}`
+            console.log(buyerProfileLink)
+            // profileLinkObject[buyer] = `https://vechainstats.com/account/${buyer}`
+            // console.log('objct',profileLinkObject)
+            // setProfileLinks(profileLinkObject)
+            
+            setProfileLinks(prevProfileLinks => ({
+              ...prevProfileLinks,
+              [buyer]: buyerProfileLink
+            }));
 
             const getProfileName = async (buyer) => {
             const wovNickName = await connex.thor
@@ -378,13 +389,11 @@ export default function App() {
 
             const isWalletAddress = 
              typeof decodedLog.buyer === 'string' && decodedLog.buyer.length === 42;
-            console.log(decodedLog.buyer)
 
-            if (isWalletAddress) {
+            if (isWalletAddress) {  
               decodedLog.buyer = decodedLog.buyer.substring(0,8)
             }
-
-
+  
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
             
@@ -544,9 +553,9 @@ export default function App() {
     
       <div className='selector-group'>
         
-      <div className='selector' onClick={() => handleDateRangeChange('prev 24 hrs')} ><span>24 hrs</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('prev 7 days')}><span>7 days</span></div>
-      <div className='selector' onClick={() => handleDateRangeChange('prev 30 days')}><span>30 days</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('24 hrs')} ><span>24 hrs</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('7 days')}><span>7 days</span></div>
+      <div className='selector' onClick={() => handleDateRangeChange('30 days')}><span>30 days</span></div>
       </div>
 
 
@@ -574,7 +583,8 @@ export default function App() {
               {Object.entries(walletAmounts).map(([wallet, count], index) =>(
                 <li key={wallet}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                  {wallet} - {count} $VET
+                    {wallet}: {count} 
+                  {/* <a href={profileLinks[wallet]}>{wallet}</a> - {count} $VET */}
                   </p>
                 </li>
               ))}
@@ -588,7 +598,7 @@ export default function App() {
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
                   <p className={index === 0 ? 'bold-text' : ''}>
-                    {count[0]} - {count[1]} $VET
+                    {count[0]} - {count[1]}
                   </p>
                 </li>
               ))}
