@@ -54,8 +54,10 @@
 }
 .collectors {
   grid-column: 3;
-
 }
+
+
+
 .collections {
   grid-column: 4;
 }

@@ -373,9 +373,18 @@ export default function App() {
               return buyer
             }
 
-            const profileName = await getProfileName(buyer)
+            let profileName = await getProfileName(buyer)
             decodedLog.buyer = profileName
-            
+
+            const isWalletAddress = 
+             typeof decodedLog.buyer === 'string' && decodedLog.buyer.length === 42;
+            console.log(decodedLog.buyer)
+
+            if (isWalletAddress) {
+              decodedLog.buyer = decodedLog.buyer.substring(0,8)
+            }
+
+
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
             
@@ -571,6 +580,8 @@ export default function App() {
               ))}
           </ul>
         </div>
+
+
         <div className='collections item'>
           <h2>top 5 collections</h2>
           <ul style={{listStyleType:"none"}}>
