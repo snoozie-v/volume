@@ -354,16 +354,18 @@ export default function App() {
             })();
 
             const buyer = getBuyer(decodedLog)
-            console.log(buyer)
+            const rawBuyer = buyer
+            decodedLog.rawBuyer = buyer
+
             const buyerProfileLink = `https://vechainstats.com/account/${buyer}`
-            console.log(buyerProfileLink)
+
             // profileLinkObject[buyer] = `https://vechainstats.com/account/${buyer}`
             // console.log('objct',profileLinkObject)
             // setProfileLinks(profileLinkObject)
             
             setProfileLinks(prevProfileLinks => ({
               ...prevProfileLinks,
-              [buyer]: buyerProfileLink
+              [rawBuyer]: buyerProfileLink
             }));
 
             const getProfileName = async (buyer) => {
@@ -385,15 +387,14 @@ export default function App() {
             }
 
             let profileName = await getProfileName(buyer)
-            decodedLog.buyer = profileName
-
-            const isWalletAddress = 
-             typeof decodedLog.buyer === 'string' && decodedLog.buyer.length === 42;
+            decodedLog.profileName = profileName
+  
+            const isWalletAddress = decodedLog.rawBuyer.length === 42;
 
             if (isWalletAddress) {  
-              decodedLog.buyer = decodedLog.buyer.substring(0,8)
+              decodedLog.buyer = decodedLog.profileName.substring(0,16)
             }
-  
+            
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
             
@@ -493,7 +494,8 @@ export default function App() {
 
         for (const transfer of formattedTransfers) {
           const wallet = transfer.buyer;
-       
+          const rawWallet = transfer.rawBuyer
+   
           
           if (quantities[wallet]) {
             quantities[wallet]++;
@@ -517,6 +519,7 @@ export default function App() {
         }
 
         const amountsArray = Object.entries(amounts);
+        console.log(amountsArray)
         amountsArray.sort((a, b) => b[1] - a[1]);
         const top5Collector = amountsArray.slice(0, 5)
         const sortedAmounts = Object.fromEntries(top5Collector);
@@ -584,7 +587,7 @@ export default function App() {
                 <li key={wallet}>
                   <p className={index === 0 ? 'bold-text' : ''}>
                     {wallet}: {count} 
-                  {/* <a href={profileLinks[wallet]}>{wallet}</a> - {count} $VET */}
+                  {/* <a href={profileLinks[transfer.rawBuyer]}>{wallet}</a> - {count} $VET */}
                   </p>
                 </li>
               ))}
@@ -621,7 +624,7 @@ export default function App() {
                 boxShadow: "inset -5px -5px 10px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <p>buyer: {transfer.buyer}</p>
+              <p>buyer: <a href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
               <p>price: {transfer.price}</p>
               <p>collection: {transfer.collection}</p>
               <p>tokenID: {transfer.tokenId}</p>
