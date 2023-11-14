@@ -241,7 +241,16 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+  }  
+}
 
-  
+@media (prefers-color-scheme: light) {
+
+  .item {
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+}
+  .item h2 {
+    border-bottom: 1px solid black;
+  }
 }
