@@ -543,15 +543,15 @@ export default function App() {
     <>
  
     <div className='navBar'>
-      <div className='home'><a href="https://www.non-fungiblenews.com/">home</a></div>
-      <div className='sales'><a href="https://volume-mauve.vercel.app/">sales-today</a></div>
+      <div className='home'><a href="https://www.non-fungiblenews.com/">Home</a></div>
+      <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
     </div>
 
-    <h1>vechain sales history</h1>
+    <h1>Vechain NFT Sales History</h1>
     <div className='times'>
-          <p>range: {selectedRange}</p>
-          <p>count: {totalCount}</p> 
-          <p>total $VET: {vetCount}</p>
+          <p>Range: {selectedRange}</p>
+          <p>Count: {totalCount}</p> 
+          <p>Total $VET: {vetCount}</p>
         </div>
     
       <div className='selector-group'>
@@ -567,7 +567,7 @@ export default function App() {
 
 
         <div className='marketplaces item'>
-          <h2>marketplaces</h2>
+          <h2>Marketplaces</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(marketplaceData).map(([mp, count], index) => (
                 <li key={mp}>
@@ -581,7 +581,7 @@ export default function App() {
 
 
         <div className='collectors item'>
-          <h2>top 5 collectors</h2>
+          <h2>Top 5 Collectors</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(walletAmounts).map(([wallet, count], index) =>(
                 <li key={wallet}>
@@ -596,7 +596,7 @@ export default function App() {
 
 
         <div className='collections item'>
-          <h2>top 5 collections</h2>
+          <h2>Top 5 Collections</h2>
           <ul style={{listStyleType:"none"}}>
               {Object.entries(collectionAmt).map(([collection, count], index) => (
                 <li key={collection}>
@@ -608,7 +608,7 @@ export default function App() {
           </ul>
         </div>      
       </div>
-          <h3 className='transfer-title'>transfers:</h3>
+          <h3 className='transfer-title'>Transfers:</h3>
           <div className='transfers'>
       <ul className='transfers-list' style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {transfers && transfers.length > 0 ? (
@@ -624,16 +624,16 @@ export default function App() {
                 boxShadow: "inset -5px -5px 10px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <p>buyer: <a href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
-              <p>price: {transfer.price}</p>
-              <p>collection: {transfer.collection}</p>
-              <p>tokenID: {transfer.tokenId}</p>
-              <p>type: {transfer.type}</p>
+              <p>Buyer: <a href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
+              <p>Price: {transfer.price}</p>
+              <p>Collection: {transfer.collection}</p>
+              <p>TokenID: {transfer.tokenId}</p>
+              <p>Type: {transfer.type}</p>
               <p>
-                time:{" "}
+                Time:{" "}
                 {new Date(transfer.meta.blockTimestamp * 1000).toLocaleString()}
               </p>
-              <p>count: {transfer.number}</p>
+              <p>Count: {transfer.number}</p>
             </li>
           ))
         ) : (
