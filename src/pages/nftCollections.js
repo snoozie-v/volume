@@ -182,7 +182,8 @@ const nftCollections = [
     {"id":186,"name":"VeBounce Old","title":"VeBounce Old","banner":"","nftAddress":"0x8502a0bc9857a43fe7b5c700044fd6dce05619e4"},
     {"id":187,"name":"MVA Elite Alphas","title":"MVA Elite Alphas","banner":"","nftAddress":"0x9fa1702b8c0ca235f4171e7bb554bb5ab4fa68b2"},
     {"id":188,"name":"Vananessia","title":"Vananessia","banner":"","nftAddress":"0xde965956ee92bc19d7f2db15af49029c6dc7b315"},
-    {"id":189,"name":"THE GODS 2.0","title":"THE GODS 2.0","banner":"","nftAddress":"0x60f1ab3790fb9cb07c2625c94510b3b7bf5d010a"}
+    {"id":189,"name":"THE GODS 2.0","title":"THE GODS 2.0","banner":"","nftAddress":"0x60f1ab3790fb9cb07c2625c94510b3b7bf5d010a"},
+    {"id":190,"name":"PepePlug", "title":"PepePlug", "banner":"", "nftAddress":"0x86a3d32efc88cc5711e4ee4b0b3f5048bdaf19ea"},
   ]
 
   export default nftCollections;

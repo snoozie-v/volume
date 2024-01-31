@@ -46,16 +46,18 @@ async function fetchPrice(blockHeight, token, amt, type) {
     });
   
     const data = await response.json();
-  
+    console.log(token, amt, data)
     const numData = parseFloat(data[1]);
-  
+    console.log(numData)
     const firstAmount = (numData * amt).toString();
-  
+    console.log(firstAmount)
     if (type === "WOV Offer Accepted") {
       const vetAmount = Math.floor(firstAmount);
+      console.log(vetAmount)
       return vetAmount;
     } else if (type === "WOV Purchase") {
       const vetAmount = Math.floor(firstAmount / 1e18);
+      console.log(vetAmount)
       return vetAmount;
     }
   }

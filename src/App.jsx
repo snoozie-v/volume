@@ -435,7 +435,6 @@ export default function App() {
         }
 
         const transferTypeAmountsArray = Object.entries(marketplaceAmounts)
-   
 
         const consolidatedMarketplaces = {
           'VeSea': 0,
