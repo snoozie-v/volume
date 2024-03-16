@@ -185,7 +185,7 @@ const nftCollections = [
     {"id":189,"name":"THE GODS 2.0","title":"THE GODS 2.0","banner":"","nftAddress":"0x60f1ab3790fb9cb07c2625c94510b3b7bf5d010a"},
     {"id":190,"name":"PepePlug", "title":"PepePlug", "banner":"", "nftAddress":"0x86a3d32efc88cc5711e4ee4b0b3f5048bdaf19ea"},
     {"id":191,"name":"vet.domains", "title":"vet.domains", "banner":"", "nftAddress":"0x6e04f400810be5c570c08ea2def43c4d44481063"},
-    
+    {"id":192,"name":"Mino Mob Legendary", "title":"Mino Mob Legendary", "banner":"", "nftAddress":"0xcb831e98a3ae13b4a124ef8d0088edfee3de0c89"}
   ]
 
   export default nftCollections;
