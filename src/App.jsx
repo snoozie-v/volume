@@ -542,7 +542,7 @@ export default function App() {
     <>
  
     <div className='navBar'>
-      <div className='home'><a href="https://www.non-fungiblenews.com/">Home</a></div>
+      <div className='home'><a href="https://minomob.com/">Home</a></div>
       <div className='sales'><a href="https://volume-mauve.vercel.app/">Sales-Today</a></div>
     </div>
 
@@ -625,7 +625,15 @@ export default function App() {
             >
               <p>Buyer: <a href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
               <p>Price: {transfer.price}</p>
-              <p>Collection: {transfer.collection}</p>
+              <p>Collection:
+  <a 
+    href={`https://vechainstats.com/account/${transfer.nftAddress}`}
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+     {transfer.collection}
+  </a>
+</p>
               <p>TokenID: {transfer.tokenId}</p>
               <p>Type: {transfer.type}</p>
               <p>

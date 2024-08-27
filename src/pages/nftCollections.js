@@ -189,7 +189,9 @@ const nftCollections = [
     {"id":193,"name":"X-Node Slayers", "title":"X-Node Slayers", "banner":"", "nftAddress":"0x84466753b03e2f6d74afe8bf356c09e63dd36d67"},
     {"id":194,"name":"Nefarials", "title":"Nefarials", "banner":"", "nftAddress":"0x51fd9e08cbf075d56e436fd10076c662872a253d"},
     {"id":195,"name":"Corgi Gang 2.0", "title":"Corgi Gang 2.0", "banner":"", "nftAddress":"0x3be746b5ca311be029b4e1dfe0e3811a08bd11e9"},
-    
+    {"id":196,"name":"RatVerse Ascension", "title":"RatVerse Ascenscion", "banner":"", "nftAddress":"0x1b60b8f4b83d146c051126873b9207247f7676ca"},
+    {"id":197,"name":"Squad Stones", "title":"Squad Stones", "banner":"", "nftAddress":"0x57acfc04c47bcd622870f617696e20118670fcd7"},
+    {"id":198,"name":"Shell Mates", "title":"Shell Mates", "batter":"", "nftAddress":"0x98ec1e80031084eee055cb605c5b86eb87f60c71"}
   ]
 
   export default nftCollections;
