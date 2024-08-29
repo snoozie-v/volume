@@ -191,7 +191,11 @@ const nftCollections = [
     {"id":195,"name":"Corgi Gang 2.0", "title":"Corgi Gang 2.0", "banner":"", "nftAddress":"0x3be746b5ca311be029b4e1dfe0e3811a08bd11e9"},
     {"id":196,"name":"RatVerse Ascension", "title":"RatVerse Ascenscion", "banner":"", "nftAddress":"0x1b60b8f4b83d146c051126873b9207247f7676ca"},
     {"id":197,"name":"Squad Stones", "title":"Squad Stones", "banner":"", "nftAddress":"0x57acfc04c47bcd622870f617696e20118670fcd7"},
-    {"id":198,"name":"Shell Mates", "title":"Shell Mates", "batter":"", "nftAddress":"0x98ec1e80031084eee055cb605c5b86eb87f60c71"}
+    {"id":198,"name":"Shell Mates", "title":"Shell Mates", "banner":"", "nftAddress":"0x98ec1e80031084eee055cb605c5b86eb87f60c71"},
+    {"id":199,"name":"Faction1", "title":"Faction1","banner":"", "nftAddress":"0xF46d132cFC813dA70C0806921D05ab3057d8bAdD"},
+    {"id":200,"name":"Sagaz WildBill Currency", "title":"Sagaz WildBill Currency", "banner":"", "nftAdress":"0xF46d132cFC813dA70C0806921D05ab3057d8bAdD"},
+    
+  
   ]
 
   export default nftCollections;
