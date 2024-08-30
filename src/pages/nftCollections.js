@@ -193,9 +193,9 @@ const nftCollections = [
     {"id":197,"name":"Squad Stones", "title":"Squad Stones", "banner":"", "nftAddress":"0x57acfc04c47bcd622870f617696e20118670fcd7"},
     {"id":198,"name":"Shell Mates", "title":"Shell Mates", "banner":"", "nftAddress":"0x98ec1e80031084eee055cb605c5b86eb87f60c71"},
     {"id":199,"name":"Faction1", "title":"Faction1","banner":"", "nftAddress":"0xF46d132cFC813dA70C0806921D05ab3057d8bAdD"},
-    {"id":200,"name":"Sagaz WildBill Currency", "title":"Sagaz WildBill Currency", "banner":"", "nftAdress":"0xF46d132cFC813dA70C0806921D05ab3057d8bAdD"},
-    
-  
+    {"id":200,"name":"Sagaz WildBill Currency", "title":"Sagaz WildBill Currency", "banner":"", "nftAddress":"0x88270CA93379de8245d653070D958ae28b91B01c"},
+    {"id":201,"name":"Squad Opponents", "title":"Squad Oppononents", "banner":"","nftAddress":"0xb34cfddcc8b1078cbad5db7acd7c05ab6c0ad880"},
+
   ]
 
   export default nftCollections;

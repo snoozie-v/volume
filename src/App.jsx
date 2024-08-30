@@ -122,7 +122,7 @@ export default function App() {
         const formattedTransfers = await Promise.all(
           logs.map(async (log, index) => {
             let decodedLog = null;
-            console.log(log.meta.txID)
+
             switch (log.topics[0]) {
               case "0xbb7cf2addc576d161c349efe1848029343caab038bd75e9bed6956bcf1a512de":
                 // eslint-disable-next-line no-case-declarations
@@ -222,7 +222,6 @@ export default function App() {
                     console.log("default case");
                     break;             
             }
-
             const getBuyer = (transfer) => {
               switch (transfer.type) {
                 case "BVM Purchase":
@@ -397,14 +396,14 @@ export default function App() {
             
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
-            // console.log("price", price)
-            console.log(nftAddress)
-            // const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase()) 
-            // decodedLog.collection = collectionName ? collectionName.title : (() => {
-            //   // console.log(nftAddress);
-            //   return nftAddress;
-            // })();
 
+            try {
+              const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase());
+              decodedLog.collection = collectionName ? collectionName.title : nftAddress;
+            } catch (error) {
+              console.error('Error in finding collection:', error, log, decodedLog);
+              decodedLog.collection = "Unable to determine"
+            }
             decodedLog.nftAddress = nftAddress
             decodedLog.price = price;
             decodedLog.tokenId = tokenId;
@@ -626,10 +625,29 @@ export default function App() {
                 boxShadow: "inset -5px -5px 10px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <p>Buyer: <a href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
+              <p>Buyer: <a 
+                  style={{
+                    color: 'blue',
+                  }}
+              href={profileLinks[transfer.rawBuyer]}>{transfer.buyer}</a></p>
+              <p>
+  <a 
+    style={{
+      color: 'blue',
+    }}
+    href={`https://vechainstats.com/transaction/${transfer.meta.txID}`}
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+     Transaction On VeChain Stats
+  </a>
+</p>
               <p>Price: {transfer.price}</p>
               <p>Collection:
   <a 
+        style={{
+          color: 'blue',
+        }}
     href={`https://vechainstats.com/account/${transfer.nftAddress}`}
     target="_blank" 
     rel="noopener noreferrer"
