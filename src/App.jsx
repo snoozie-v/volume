@@ -122,7 +122,7 @@ export default function App() {
         const formattedTransfers = await Promise.all(
           logs.map(async (log, index) => {
             let decodedLog = null;
-
+            console.log(log.meta.txID)
             switch (log.topics[0]) {
               case "0xbb7cf2addc576d161c349efe1848029343caab038bd75e9bed6956bcf1a512de":
                 // eslint-disable-next-line no-case-declarations
@@ -397,12 +397,13 @@ export default function App() {
             
             const tokenId = getTokenId(decodedLog);
             const price = await getPrice(decodedLog);
-            
-            const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase()) 
-            decodedLog.collection = collectionName ? collectionName.title : (() => {
-              console.log(nftAddress);
-              return nftAddress;
-            })();
+            // console.log("price", price)
+            console.log(nftAddress)
+            // const collectionName = await nftCollections.find((collection) => collection.nftAddress.toLowerCase() === nftAddress.toLowerCase()) 
+            // decodedLog.collection = collectionName ? collectionName.title : (() => {
+            //   // console.log(nftAddress);
+            //   return nftAddress;
+            // })();
 
             decodedLog.nftAddress = nftAddress
             decodedLog.price = price;
@@ -411,8 +412,10 @@ export default function App() {
             const account = contractToAccount(nftAddress);
             decodedLog.account = account
             // decodedLog.image = await getImageForCollection(account, tokenId);
+            // console.log(decodedLog)
             return decodedLog;
           })
+          
         );
         console.log("formatted transfers", formattedTransfers)
         setTransfers(formattedTransfers);
@@ -518,7 +521,7 @@ export default function App() {
         }
 
         const amountsArray = Object.entries(amounts);
-        console.log(amountsArray)
+        // console.log(amountsArray)
         amountsArray.sort((a, b) => b[1] - a[1]);
         const top5Collector = amountsArray.slice(0, 5)
         const sortedAmounts = Object.fromEntries(top5Collector);
